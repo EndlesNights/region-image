@@ -61,32 +61,32 @@ Hooks.once("init", function () {
     uniform mediump float hatchThickness;
 
 
-		uniform sampler2D uTexture;
-		uniform vec2 canvasDimensions;
-		uniform float canvasX;
-		uniform float canvasY;
-		uniform float canvasGrid;
-		uniform float alphaOffset;
+        uniform sampler2D uTexture;
+        uniform vec2 canvasDimensions;
+        uniform float canvasX;
+        uniform float canvasY;
+        uniform float canvasGrid;
+        uniform float alphaOffset;
 
-		uniform bool drawTerrianTint;
-		uniform bool hasCustomImage;
+        uniform bool drawTerrianTint;
+        uniform bool hasCustomImage;
 
 
-		varying vec2 vCanvasCoord; // normalized canvas coordinates
+        varying vec2 vCanvasCoord; // normalized canvas coordinates
 
     void main() {
 
       if(hasCustomImage){
-			vec2 textureCoord = fract(vCanvasCoord * vec2(canvasX, canvasY) / canvasGrid);
-			
-			vec4 textureColor = texture2D(uTexture, textureCoord);
-			textureColor.a *= alphaOffset;
+            vec2 textureCoord = fract(vCanvasCoord * vec2(canvasX, canvasY) / canvasGrid);
+            
+            vec4 textureColor = texture2D(uTexture, textureCoord);
+            textureColor.a *= alphaOffset;
 
             if(drawTerrianTint){
-				gl_FragColor = (textureColor + tintAlpha) / 2.0;
-			} else {
-				gl_FragColor = textureColor;
-			}
+                gl_FragColor = (textureColor + tintAlpha) / 2.0;
+            } else {
+                gl_FragColor = textureColor;
+            }
         return;
       }
 
